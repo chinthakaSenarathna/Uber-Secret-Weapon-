@@ -87,6 +87,15 @@ public class LocationService {
         return nearbyDrivers;
     }
 
+    /* Remove driver when they go offline
+    *  Map to Redis ZREM command
+    * */
     public void removeDriver(String driverId) {
+        log.info("Removing driver: {}", driverId);
+
+        redisTemplate.opsForGeo().remove(
+                DRIVERS_GEO_KEY,
+                driverId
+        );
     }
 }
