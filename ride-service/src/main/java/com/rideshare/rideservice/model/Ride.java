@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -47,6 +49,8 @@ public class Ride {
     private String dropAddress;
 
     // Ride status - tracks the lifecycle
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private RideStatus rideStatus;
 
     // Fare Details
@@ -55,8 +59,10 @@ public class Ride {
     private double actualFare;
 
     // Timestamps
+    @CreationTimestamp
     private LocalDateTime createdAt;
 
+    @UpdateTimestamp
     private  LocalDateTime updatedAt;
 
     private LocalDateTime startedTime;
