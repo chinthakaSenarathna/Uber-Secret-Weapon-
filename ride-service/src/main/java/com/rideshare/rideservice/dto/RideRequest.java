@@ -1,0 +1,37 @@
+package com.rideshare.rideservice.dto;
+
+import jakarta.annotation.Nullable;
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class RideRequest {
+
+    @NotBlank(message = "Rider id is required")
+    private String riderId;
+
+    @NotNull(message = "Pickup latitude is required")
+    private double pickupLatitude;
+
+    @NotNull(message = "Pickup longitude is required")
+    private double pickupLongitude;
+
+    @NotNull(message = "Pickup address is required")
+    private String pickupAddress;
+
+    @NotNull(message = "Drop latitude is required")
+    private double dropLatitude;
+
+    @NotNull(message = "Drop longitude is required")
+    private double dropLongitude;
+
+    @NotNull(message = "Drop Address is required")
+    private String dropAddress;
+
+}
