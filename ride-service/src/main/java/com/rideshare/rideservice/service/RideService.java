@@ -42,7 +42,27 @@ public class RideService {
 
         Ride savedRide = rideRepository.save(newRide);
 
+        // Step 2: Publish even on kafka
+        // Matching service consume this to find nearest drivers
+        RideRequestedEvent event = new RideRequestedEvent(
+                savedRide.getId(),
+                savedRide.getRiderId(),
+                savedRide.getPickupLatitude(),
+                savedRide.getPickupLongitude(),
+                savedRide.getPickupAddress(),
+                savedRide.getDropLatitude(),
+                savedRide.getDropLongitude(),
+                savedRide.getDropAddress()
+        );
 
+        kafkaTemplate.send(RIDE_REQUESTED_TOPIC, savedRide.getId(), event);
+        log.info("RideRequestedEvent publish on kafka from ride {}", savedRide.getId());
+
+        // Update status to Matching
+        savedRide.setRideStatus(RideStatus.MATCHING);
+        rideRepository.save(savedRide);
+
+        return mapToResponse(savedRide);
 
     }
 
@@ -61,5 +81,26 @@ public class RideService {
     }
 
     public RideResponse cancelRide(String rideId) {
+    }
+
+    private RideResponse mapToResponse(Ride savedRide) {
+        RideResponse response = new RideResponse();
+        response.setId(savedRide.getId());
+        response.setRiderId(savedRide.getRiderId());
+        response.setDriverId(savedRide.getDriverId());
+        response.setPickupLatitude(savedRide.getPickupLatitude());
+        response.setPickupLongitude(savedRide.getPickupLongitude());
+        response.setPickupAddress(savedRide.getPickupAddress());
+        response.setDropLatitude(savedRide.getDropLatitude());
+        response.setDropLongitude(savedRide.getDropLongitude());
+        response.setDropAddress(savedRide.getDropAddress());
+        response.setRideStatus(savedRide.getRideStatus());
+        response.setEstimatedFare(savedRide.getEstimatedFare());
+        response.setActualFare(savedRide.getActualFare());
+        response.setCreatedAt(savedRide.getCreatedAt());
+        response.setUpdatedAt(savedRide.getUpdatedAt());
+        response.setStartedTime(savedRide.getStartedTime());
+        response.setCompleteTime(savedRide.getCompleteTime());
+        return response;
     }
 }
