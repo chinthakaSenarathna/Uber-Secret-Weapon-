@@ -1,15 +1,13 @@
-package com.rideshare.rideservice.event;
+package com.rideshare.machingservice.event;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
  *
- * An event publish to kafka, when a ride is requested
- * Matching service consumes this event
- * Topic: ride.requested
+ * Event consumed from kafka topic: ride.requested
+ * Published by Ride Service when a rider requests a ride
  *
  * */
 
