@@ -2,6 +2,7 @@ package com.rideshare.rideservice.service;
 
 import com.rideshare.rideservice.dto.RideRequest;
 import com.rideshare.rideservice.dto.RideResponse;
+import com.rideshare.rideservice.event.RideMatchedEvent;
 import com.rideshare.rideservice.event.RideRequestedEvent;
 import com.rideshare.rideservice.model.Ride;
 import com.rideshare.rideservice.model.RideStatus;
