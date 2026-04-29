@@ -4,11 +4,6 @@ This project demonstrates how ride-hailing platforms (like Uber) match riders wi
 
 ---
 
-## 🎥 Demo
-👉 Add your demo video / GIF here
-
----
-
 ## 🏗️ Architecture Overview
 
 ### Services
