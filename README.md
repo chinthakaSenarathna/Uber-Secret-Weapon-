@@ -93,18 +93,33 @@ mvn spring-boot:run
 
 **🧪 End-to-End Testing**
 
-1. Add Driver Locations -> http://localhost:8082/api/v1/locations/drivers/update
+1. Add Driver Locations
 
+``` bash
+POST http://localhost:8082/api/v1/locations/drivers/update
+```
+
+``` bash
 {
     "driverId": "driver:5",
     "latitude": 12.9630,
     "longitude": 77.6200
 }
+```
 
-2. Find Nearby Drivers -> http://localhost:8082/api/v1/locations/drivers/nearby?latitude=12.9761&longitude=77.5946&radius=2.0
+2. Find Nearby Drivers
 
-3. Request a Ride -> http://localhost:8083/api/v1/rides/request
+``` bash
+GET http://localhost:8082/api/v1/locations/drivers/nearby?latitude=12.9761&longitude=77.5946&radius=2.0
+```
 
+4. Request a Ride
+
+``` bash
+POST http://localhost:8083/api/v1/rides/request
+```
+
+``` bash
 {
     "riderId": "rider:2",
     "pickupLatitude": 12.9500,
@@ -114,18 +129,43 @@ mvn spring-boot:run
     "dropLongitude": 77.6247,
     "dropAddress": "ML mall, Bangalore"
 }
+```
 
-4. Check Ride Status -> http://localhost:8083/api/v1/rides/{rideId}
+4. Check Ride Status
 
-5. Get List of Rides of Rider -> http://localhost:8083/api/v1/rides/rider/{riderId}
+``` bash
+GET http://localhost:8083/api/v1/rides/{rideId}
+```
 
-6. Start Ride -> http://localhost:8083/api/v1/rides/3105e6d2-5c9c-4181-af92-ac267677d4ab/start
+6. Get List of Rides of Rider
 
-7. Complete Ride -> http://localhost:8083/api/v1/rides/3105e6d2-5c9c-4181-af92-ac267677d4ab/complete
+``` bash
+GET http://localhost:8083/api/v1/rides/rider/{riderId}
+```
 
-8. Cancel Ride -> http://localhost:8083/api/v1/rides/3105e6d2-5c9c-4181-af92-ac267677d4ab/cancel
+8. Start Ride
 
-9. Remove Driver -> http://localhost:8082/api/v1/locations/drivers/{driverId}
+``` bash
+PUT http://localhost:8083/api/v1/rides/3105e6d2-5c9c-4181-af92-ac267677d4ab/start
+```
+
+10. Complete Ride
+
+``` bash
+PUT http://localhost:8083/api/v1/rides/3105e6d2-5c9c-4181-af92-ac267677d4ab/complete
+```
+
+12. Cancel Ride
+
+``` bash
+PUT http://localhost:8083/api/v1/rides/3105e6d2-5c9c-4181-af92-ac267677d4ab/cancel
+```
+
+14. Remove Driver
+
+``` bash
+DELETE http://localhost:8082/api/v1/locations/drivers/{driverId}
+```
 
 🔍 Redis Verification
 
